@@ -9,7 +9,6 @@ const productDetailCloseIcon = document.querySelector('.product-detail-close');
 const cardContainer = document.querySelector('.cards-container');
 const darkScreen = document.querySelector('.dark-screen');
 
-
 menuEmail.addEventListener('click', toggleDestopMenu);
 burgerMenu.addEventListener('click', toggleMobileMenu);
 menuCarritoIcon.addEventListener('click', toggleCarritoAside);
@@ -60,7 +59,17 @@ function toggleCarritoAside() {
 
 }
 
-function openProductDetailAside() {
+function openProductDetailAside(product) {
+
+    const productDetailImg = document.querySelector('#product-detail-img');
+    const productDetailPrice = document.querySelector('.product-info p:nth-child(1)');
+    const productDetailName = document.querySelector('.product-info p:nth-child(2)');
+    const productDetailDescription = document.querySelector('.product-info p:nth-child(3)');
+
+    productDetailImg.setAttribute('src', product.img);
+    productDetailPrice.innerText = '$' + product.price;
+    productDetailName.innerText = product.name;
+    productDetailDescription.innerText = product.info;
 
     shoppingCartContainer.classList.add('inactive');
     productDetailContainer.classList.remove('inactive');
@@ -96,26 +105,32 @@ productList.push({
     name: 'Bike',
     price: 120,
     img: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    info: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace',
 })
 productList.push({
     name: 'Pantalla',
     price: 220,
-    img: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    img: 'https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    info: 'With its practical position, this Display also fulfills a decorative function, add your hall or workspace',
 })
 productList.push({
     name: 'PC',
     price: 620,
-    img: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    img: 'https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    info: 'With its practical position, this PC also fulfills a decorative function, add your hall or workspace',
 })
 
 function renderProducts(arr) {
-    for (product of arr) {
+    for (const product of arr) {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
 
         const productImage = document.createElement('img');
         productImage.setAttribute('src', product.img);
-        productImage.addEventListener('click', openProductDetailAside)
+        productImage.addEventListener('click', () => {
+            openProductDetailAside(product);
+            console.log(product);
+        })
 
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
