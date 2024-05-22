@@ -138,7 +138,7 @@ nav {
     margin: 0;
 }
 
-.add-product-menu ul li input{
+.add-product-menu ul li input {
     border: 1px solid var(--very-light-pink);
     border-radius: 6px;
     width: calc(100% - 10px);
